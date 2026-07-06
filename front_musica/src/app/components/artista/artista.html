@@ -1,0 +1,50 @@
+<div style="padding: 20px; font-family: Arial, sans-serif;">
+  <h2>Control de Artistas</h2>
+  
+  <form (ngSubmit)="guardarArtista()" style="margin-bottom: 25px; display: flex; gap: 10px; flex-wrap: wrap;">
+  
+  <input [(ngModel)]="nuevoArtista.nombre" name="nombre" placeholder="Nombre" required />
+  <input [(ngModel)]="nuevoArtista.apellido" name="apellido" placeholder="Apellido" required />
+  
+  
+  <input [(ngModel)]="nuevoArtista.fecha_nacimiento" name="fecha_nacimiento" type="date" required />
+  
+  <input [(ngModel)]="nuevoArtista.nacionalidad" name="nacionalidad" placeholder="Nacionalidad" required />
+  
+  
+  <button *ngIf="!editando" type="submit" style="cursor: pointer; background-color: #28a745; color: white; border: none; padding: 5px 15px;">
+    Guardar Artista
+  </button>
+
+  <button *ngIf="editando" type="submit" style="cursor: pointer; background-color: #007bff; color: white; border: none; padding: 5px 15px;">
+    Actualizar Artista
+  </button>
+  
+  <button *ngIf="editando" type="button" (click)="limpiarFormulario()" style="cursor: pointer; background-color: #6c757d; color: white; border: none; padding: 5px 15px;">
+    Cancelar
+  </button>
+</form>
+
+  <table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+    <thead style="background-color: #f2f2f2;">
+      <tr>
+        <th style="padding: 8px;">ID</th>
+        <th style="padding: 8px;">Nombre Completo</th>
+        <th style="padding: 8px;">Nacionalidad</th>
+        <th style="padding: 8px;">Fecha Nacimiento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let art of artistas">
+        <td style="padding: 8px;">{{ art.id }}</td>
+        <td style="padding: 8px;">{{ art.nombre }} {{ art.apellido }}</td>
+        <td style="padding: 8px;">{{ art.nacionalidad }}</td>
+        <td style="padding: 8px;">{{ art.fecha_nacimiento }}</td>
+       <button type="button" (click)="seleccionarParaEditar(art)">Editar</button>
+        <button (click)="eliminarArtista(art.id)" class="btn btn-danger btn-sm" style="margin-left: 5px;">
+          Eliminar
+        </button>
+      </tr>
+    </tbody>
+  </table>
+</div>
